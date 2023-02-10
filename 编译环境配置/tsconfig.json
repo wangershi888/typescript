@@ -1,0 +1,37 @@
+{
+  "include": ["./src/**/*"],
+  "exclude": ["./src/hello/**/*"],
+  "extends": "./config/base.json",
+  "compilerOptions": {
+    // 编译目标语言 es3、es5、es5等
+    "target": "ES3",
+    // 使用的模块化的规范
+    "module": "amd",
+    // 用来指定我们项目中要使用的库
+    // "lib": []
+    // 编译后文件路径
+    "outDir": "./dist",
+    // 将代码合并为一个文件，将全局作用域中的代码合并到一起
+    "outFile": "./dist/app.js",
+    // 是否对js文件进行编译
+    "allowJs": true,
+    // 是否检查js代码语法
+    "checkJs": true,
+    // 是否移除注释
+    "removeComments": true,
+    // 不生成编译后的文件
+    "noEmit": false,
+    // 当有错误时，不生成编译后的文件
+    "noEmitOnError": true,
+    // 在编译后的文件是否使用严格模式
+    "alwaysStrict": true,
+    // 不允许隐式any
+    "noImplicitAny": true,
+    // 不允许不明确的this
+    "noImplicitThis": true,
+    // 严格的检查空值
+    "strictNullChecks": true,
+    // 所有严格检查的总开关
+    "strict": false
+  }
+}

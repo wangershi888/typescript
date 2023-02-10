@@ -50,3 +50,51 @@ function fn(参数：类型, 参数：类型)：类型{
   | array | [1,2,3] | 任意 js 的数组 |
   | typle | [3,4] | 元素,TS 新增类型，固定长度的数组 |
   | enum | enum{A, B} | 枚举，TS 中新增类型 |
+
+## 三、编译选项
+
+`*` 表示任意文件 `**` 表示任意目录
+
+- 自动编译文件
+
+  - 编译文件时，使用`-w`指令后，TS 编译器会自动监视文件的变化，并在文件发生变化时对文件重新编译
+  - 示例：`tsc xxx.ts -w`
+
+- 自动编译整个项目
+
+  - 如果直接使用 `tsc`指令，则可以自动将当前项目下的所有`ts`文件编译为`js`文件
+  - 但是能直接使用`tsc`命令的前提是，要在项目的根目录下创建一个`ts`的配置文件`tsconfig.json`
+  - `tsconfig.json`是一个`JSON`文件，添加配置文件后，只需要`tsc`命令即可完成整个项目的编译
+  - 配置选项
+
+    - `include`
+      - 定义希望被编译的文件所在的目录
+      - 默认值：`["**/*"]`
+      - 示例： `"include": ["src/**/*","tests/**/*""]`
+      - 上述文件中，所有`src`目录和`test`目录下的文件都会被编译
+    - `exclude`
+      - 定义需要排除在外的目录
+      - 默认值：`["node_modules", "bower_components", "jspm_packages"]`
+      - 示例: `"exclude": ["./src/hello/**/*"]`
+      - 上述示例中，`src`下`hello`目录下所有的文件都不会被编译
+    - `extends`
+      - 定义被继承的配置文件
+      - 示例：`"extends": "./config/base"`
+    - `files`
+
+      - 指定被编译文件的列表，只有需要编译的文件少时才会用到
+      - 示例：
+
+        - ```
+          "files": [
+              "core.ts",
+              ...
+          ]
+
+          ```
+
+        ```
+
+        ```
+
+    - `compilerOptions`: [编译器选项](https://www.tslang.cn/docs/handbook/tsconfig-json.html)
