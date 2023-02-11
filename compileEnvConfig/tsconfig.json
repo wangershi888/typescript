@@ -1,5 +1,5 @@
 {
-  // "include": ["./src/**/*"],
+  "include": ["./src/**/*"],
   // "exclude": ["./src/hello/**/*"],
   // "extends": "./config/base.json",
   "compilerOptions": {

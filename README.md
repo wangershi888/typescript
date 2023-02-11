@@ -90,13 +90,91 @@ function fn(参数：类型, 参数：类型)：类型{
               "core.ts",
               ...
           ]
-
           ```
-
-        ```
-
-        ```
 
     - `compilerOptions`: [编译器选项](https://www.tslang.cn/docs/handbook/tsconfig-json.html)
 
-### 四、使用`webpack`针对`ts`项目打包
+## 四、使用`webpack`针对`ts`项目打包
+
+# 面向对象
+
+## 1、类（class）
+
+- 定义类
+  - ```
+    class 类名{
+      属性名: 类型
+      constructor(参数: 类型){
+        suoer() // 继承
+        this.属性名 = 参数
+      }
+      方法名(){}
+    }
+    ```
+- 示例
+
+  - 封装
+
+    ```
+      class Person {
+        // 实例属性，需要通过实例访问
+        name: string
+        age: number
+        static test: string // 静态属性（类属性），可以直接通过类访问 Person.static
+        readonly test1: string = 'readonly' // 只读属性，不可修改
+        constructor(name: string, age: number) {
+          // this表示当前的实例，就是我们新建的那个对象
+          this.name = name
+          this.age = age
+        }
+        sayHello(){}
+      }
+    ```
+
+    - 继承
+
+      ```
+        class Person {
+          // 实例属性，需要通过实例访问
+          name: string
+          age: number
+          static test: string // 静态属性（类属性），可以直接通过类访问 Person.static
+          readonly test1: string = 'readonly' // 只读属性，不可修改
+          constructor(name: string, age: number) {
+            // this表示当前的实例，就是我们新建的那个对象
+            this.name = name
+            this.age = age
+          }
+          sayHello(){}
+        }
+
+        // 继承
+        // 使 Male 继承 Person 类, 使用继承后，子类将拥有所有父类的属性和方法
+        // super表示当前类的父类，或可理解为当前父类的实例，this仍然为当前实例对象
+        class Male extends Person {
+          constructor() {
+            super() // 如果在子类中写了构造函数，则必须调用父类的构造函数super()
+          }
+          sayHello() {
+            // 子类会覆盖父类中的方法，成为方法的重写
+            // 在方法中，super表示当前类的父类，或可理解为当前父类的实例，this仍然为当前实例对象
+            super.sayHello()
+          }
+          run() {
+            // this指的是当前实例对象
+            console.log(`${this.name}在跑`)
+          }
+        }
+      ```
+
+      - 抽象类
+        - 在日常开发中可能存在`基类`或者`超类`，这种只提供别的类继承，不希望被直接实例化，因此，我们可以使用`abstract`关键字来定义，表明当前的类为一个抽象类，不允许直接被实例化
+        - 在抽象类中可以添加抽象方法
+        - 示例
+          ```
+          abstract class A {
+            // 抽象方法：使用 abstract 关键字开头，没有具体方法，抽象方法只能定义在抽象类中，且子类必须进行抽象方法的重写
+            abstract sayHello():void
+
+          }
+          ```
