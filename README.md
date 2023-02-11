@@ -168,9 +168,11 @@ function fn(参数：类型, 参数：类型)：类型{
       ```
 
       - 抽象类
+
         - 在日常开发中可能存在`基类`或者`超类`，这种只提供别的类继承，不希望被直接实例化，因此，我们可以使用`abstract`关键字来定义，表明当前的类为一个抽象类，不允许直接被实例化
         - 在抽象类中可以添加抽象方法
         - 示例
+
           ```
           abstract class A {
             // 抽象方法：使用 abstract 关键字开头，没有具体方法，抽象方法只能定义在抽象类中，且子类必须进行抽象方法的重写
@@ -178,3 +180,129 @@ function fn(参数：类型, 参数：类型)：类型{
 
           }
           ```
+
+## 2、接口(interface)
+
+接口用来定义一个类的结构，定义一个类中应该包含哪些属性和方法，也可以当作类型声明去使用，从而限制类的结构
+接口其实就是定义的一个规范
+
+```
+interface myInterface{
+  name: string
+  age: number
+}
+```
+
+interface 可以重复声明
+
+```
+interface myInterface {
+  gender: string
+}
+```
+
+- 限制类结构（类似于抽象类）
+  - 接口中之定义对象的结构，不考虑实际值
+  - 在接口中所有的方法都是抽象方法
+
+```
+interface myInter {
+  name: string
+  sayHello(): void
+}
+
+// 使我们的类满足接口的要求
+class MyClass implements myInter {
+  constructor(public name: string) {
+    this.name = name
+  }
+  sayHello():void {}
+}
+```
+
+- 属性的封装
+
+- TS 可以在属性前添加属性的修饰符
+
+  - public: 共有属性，可以在任意位置访问&修改
+  - private: 私有属性，只能在我们当前类的内部进行修改，子类也无法访问
+
+    - 可以在类的内部添加方法，使得当前属性可以在外部方法
+    - ```
+        private name: string
+        // 定义方法
+        getPrivateValue(value: string) {
+          return this.name = value
+        }
+      ```
+    - ts 中设置属性 getter 的方式
+    - ```
+      class A {
+        private _name: string
+        constructor(name: string) {
+          this._name = name
+        }
+        // 设置get关键字，从而获取私有属性
+        get name() {
+          return this._name
+        }
+        // 给私有属性赋值
+        set name(value: string) {
+          this._name = value
+        }
+      }
+
+      let a = new A('wangershi')
+      a.name = 'xxx'
+      ```
+
+  - protected：受保护的属性，只能在我们当前类和我们当前类的子类中使用，外部无法使用
+
+## 3、泛型
+
+类型不明确的时候，使用变量进行代替
+在定义函数，或类的时候，遇到类型不明确的时候，可以使用泛型
+
+- 示例
+
+```
+// T 代表统一的某个类型
+
+function fn<T>(a: T): T{
+  return a
+}
+
+// 调用
+fn(10) // 类型推断，类型为number
+fn<string>('hello') // 指定泛型，类型为string
+
+// 泛型可以指定多个
+function fn2<T, K>(a: T, b: K): Y {
+  return a
+}
+
+fn2<number, string>(12,'hello')
+
+// 限制泛型范围
+interface Inter {
+  length: number
+}
+
+// 表示当前泛型的类型，必须有 Inter 接口（或者是个类）的类型（length）
+// 所以此时 T 应为 string等具有length属性的类型的值
+// 泛型 T 必须为 Inter 的实现类（子类）
+functin fn3<T extends Inter>(a: T): number {
+  return a.length
+}
+
+fn3(123)
+
+// 泛型在类中的使用
+class MyClass<T> {
+  name: T
+  constructor(name: T) {
+    this.name = name
+  }
+}
+const mc = new MyClass<String>('123')
+```
